@@ -39,8 +39,19 @@ glue should do the same. If something triggered on StatusWindowsTeX instead,
 though both packages are present, and every such package would need to know
 this bundle exists. Do not offer it as a trigger and do not accept it as one.
 
-**`[compat]` is the only maintenance.** The `MathTeXEngine` bound here must
-stay inside the bound StatusWindows gives it under its own `[compat]`
+**Versions are in lockstep with StatusWindows.** Bundle x.y.z is released
+against StatusWindows x.y.z with `StatusWindows = "~x.y.z"` in `[compat]`:
+a floor at the matching version, open to later patches, closed to the next
+minor. Tilde rather than caret because they coincide for 0.x but diverge at
+1.x, where caret would let the bundle's minor number stop meaning anything.
+So every StatusWindows release, patches included, is followed by a bundle
+release with the same number and a bumped bound; nothing else changes. The
+registry requires a new package to start at 0.1.0 and every later version
+to be a single-step increment, which is why the sequence begins 0.1.0
+(against StatusWindows 0.2.0), then 0.2.0, then lockstep from there.
+
+**`[compat]` is the only other maintenance.** The `MathTeXEngine` bound here
+must stay inside the bound StatusWindows gives it under its own `[compat]`
 (currently `0.6.9`), or the resolver will refuse to install the bundle. When
 StatusWindows moves, move this. CompatHelper opens the pull requests; read
 them against StatusWindows's `Project.toml` before merging.
@@ -72,5 +83,5 @@ the bundle alone activates the extension.
 
 - American spelling in code, comments and prose.
 - Run `julia --project=. -e 'using Pkg; Pkg.test()'`.
-- Versions: bump the patch version for compat-only changes; there is
-  nothing else to release.
+- Versions: follow StatusWindows's number, as above. There is nothing
+  else to release.

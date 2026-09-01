@@ -12,7 +12,7 @@ StatusWindows = "13c9c970-0c32-4215-a9dc-7dd338fb31da"
 Aqua = "0.8"
 MathTeXEngine = "0.6.9"
 Reexport = "1.2"
-StatusWindows = "0.2"
+StatusWindows = "~0.2.0"
 Test = "1"
 julia = "1.10"
 

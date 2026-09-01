@@ -65,6 +65,16 @@ unchanged: `using StatusWindowsTeX` touches no window system, and a script
 that lands on a server gets an inert panel and runs to the end.
 
 
+## Versions
+
+StatusWindowsTeX is numbered in lockstep with StatusWindows: version x.y.z
+of this package requires StatusWindows x.y.z or a later patch of it (the
+compat bound is `~x.y.z`, so StatusWindows patch releases arrive without a
+bundle release, but the bundle never pins you below its own number). The
+one exception is the first registered version, 0.1.0, which the registry's
+rules for new packages require and which pairs with StatusWindows 0.2.
+
+
 ## Installation
 
 ```julia

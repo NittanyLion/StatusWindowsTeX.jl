@@ -1,0 +1,54 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    tags: ['*']
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  # Skip intermediate builds: always.
+  # Cancel intermediate builds: only if it is a pull request build.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+jobs:
+  test:
+    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    permissions: # needed to allow julia-actions/cache to proactively delete old caches that it has created
+      actions: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - '1.10'   # oldest supported, per [compat] in Project.toml
+          - '1.11'
+          - '1.12'
+          - 'pre'
+        os:
+          - ubuntu-latest
+        arch:
+          - x64
+        include:
+          # Same matrix as StatusWindows: the version sweep stays on Linux,
+          # and one job each proves the bundle loads on macOS and Windows.
+          - version: '1.12'
+            os: macos-latest      # Apple Silicon
+            arch: aarch64
+          - version: '1.12'
+            os: windows-latest
+            arch: x64
+    steps:
+      - uses: actions/checkout@v7
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: ${{ matrix.version }}
+          arch: ${{ matrix.arch }}
+      - uses: julia-actions/cache@v3
+      # Deliberately no X server, as in StatusWindows: the tests draw into
+      # a bare Cairo surface and never open a window, and running without
+      # one proves that loading the bundle needs no display either.
+      - uses: julia-actions/julia-buildpkg@v1
+      - uses: julia-actions/julia-runtest@v1

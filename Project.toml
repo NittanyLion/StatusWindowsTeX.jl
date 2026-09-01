@@ -1,0 +1,24 @@
+name = "StatusWindowsTeX"
+uuid = "9f8bd871-bb09-4d74-8531-702df8dbf94d"
+version = "0.1.0"
+authors = ["Joris Pinkse <pinkse@gmail.com>"]
+
+[deps]
+MathTeXEngine = "0a4f8689-d25c-4efe-a92b-7142dfc1aa53"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+StatusWindows = "13c9c970-0c32-4215-a9dc-7dd338fb31da"
+
+[compat]
+Aqua = "0.8"
+MathTeXEngine = "0.6.9"
+Reexport = "1.2"
+StatusWindows = "0.2"
+Test = "1"
+julia = "1.10"
+
+[extras]
+Aqua = "4c88cf16-eb10-579e-8560-4a9242c79595"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test", "Aqua"]

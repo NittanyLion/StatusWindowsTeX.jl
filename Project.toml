@@ -1,6 +1,6 @@
 name = "StatusWindowsTeX"
 uuid = "9f8bd871-bb09-4d74-8531-702df8dbf94d"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Joris Pinkse <pinkse@gmail.com>"]
 
 [deps]

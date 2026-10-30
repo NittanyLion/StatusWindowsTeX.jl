@@ -42,7 +42,7 @@ exported(m::Module) = filter(!=(nameof(m)), names(m))
 
         # StatusWindows promises that loading it touches no window system.
         # Bundling must not quietly break that promise.
-        @test !StatusWindows.GLFW.isinitialized()
+        @test !StatusWindows.GLFW.is_initialized()
     end
 
     @testset "everything is re-exported, and from one place" begin
